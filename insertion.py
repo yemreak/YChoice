@@ -1,5 +1,6 @@
 import sys
-from choice import isBetter
+from pathlib import Path
+from choice import isWorse
 
 SEPERATOR = "\n"
 
@@ -17,24 +18,31 @@ def insertionSort(arr):
         # greater than key, to one position ahead
         # of their current position
         j = i-1
-        while j >= 0 and isBetter(arr[j], key):
+        while j >= 0 and isWorse(arr[j], key):
             arr[j + 1] = arr[j]
             j -= 1
         arr[j + 1] = key
 
 
 def main(args):
-    arr = []
-    with open(args[0], "r", encoding="utf-8") as file:
-        arr = file.read().split(SEPERATOR)
+    path = Path(args[0])
+
+    if not path.exists():
+        return
+
+    arr = path.read_text(encoding="utf-8").split(SEPERATOR)
 
     insertionSort(arr)
     print(arr)
+
+    outpath = (Path)(path.parent / "slist.txt")
+    outpath.write_text(SEPERATOR.join(arr), encoding="utf-8")
 
 
 def test():
     arr = ["Android", "Java", "Python", "YEmreAk"]
     insertionSort(arr)
+
     print(arr)
 
 
