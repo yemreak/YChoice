@@ -5,6 +5,8 @@
 - 📈 En az karşılaştırma ile sıralama algoritması gerekmekte
     - 👮‍♂️ Kullanıcıya çok fazla sorulmaması lazım
     - 🤦‍♂️ Yoksa sıkıcı bir hale dönüşür
+- 💁‍♂️ Eğer `A < B` ise `A`; `B`'den büyük olan her şeyden küçüktür
+- 💁‍♂️ Eğer `A > B` ise `A`; `B`'den küçük olan her şeyden büyüktür
 
 > 👨‍💻 Kodlama işlemlerinde `<` veya `>` işlemleri yerine `choice.py` metotlarını kullanın
 
