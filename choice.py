@@ -60,11 +60,50 @@ def registerCache(result: bool, key1_name: str, key2_name: str):
     return _addKey()
 
 
+def checkInCache(key1, key2):
+
+    def _getCached(key_name: str) -> Key:
+        for ikey in KEYS:
+            if key_name == ikey.name:
+                return ikey
+
+        return ikey
+
+    def _isCached(key_name):
+        return bool(_getCached(key_name))
+
+    def _getCachedKeys() -> Key:
+        keys = []
+        keys.append(key1) if _isCached(key1) else None
+        keys.append(key2) if _isCached(key2) else None
+
+        return keys
+
+    def _getLowerKeys(key_name: str):
+
+        def _getCachedLowers(key_name: str) -> list:
+            return _getCached(key_name).lower
+
+        keys = set(_getCachedLowers(key_name))
+        for ikey in KEYS[key_name].lower:
+            keys += KEYS[key_name].lower
+
+        return keys
+
+    def _isLower():
+        return key1 in _getLowerKeys()
+
+    for key in _getCachedKeys():
+        pass
+
+
 def isBetter(key1, key2, equal=False) -> bool:
-    result = compare(0, key1, key2)
-    registerCache(result, key1, key2)
-    return result
+    # checkInCache(key1, key2)
+    # registerCache(result, key1, key2)
+    return compare(0, key1, key2)
 
 
 def isWorse(key1, key2, equal=False) -> bool:
+    # checkInCache(key1, key2)
+    # registerCache(result, key1, key2)
     return compare(1, key1, key2)
