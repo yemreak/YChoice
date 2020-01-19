@@ -1,4 +1,15 @@
-KEYS = {}
+KEYS = set()
+
+
+class Key:
+
+    name = ""
+    lower = []
+    equal = []
+    higher = []
+
+    def __init__(self, name):
+        self.name = name
 
 
 def compare(x, *keys, equal=False) -> bool:
@@ -22,32 +33,31 @@ def compare(x, *keys, equal=False) -> bool:
     return (equal and keys[0] == keys[1]) or _compare()
 
 
-def registerCache(result, key1, key2):
+def registerCache(result: bool, key1_name: str, key2_name: str):
+    """Anahtarı hafızaya kaydetme
 
-    calcCount = 0
+    Arguments:
+        result {bool} -- Key1 büyükse True
+        key1_name {str} -- 1. anahtarın ismi
+        key2_name {str} -- 2. anahtarın ismi
+    """
+    def _isHigher():
+        return result
 
-    def _exists(value):
-        return value in KEYS.values
+    def _addKey():
+        key1Object = Key(key1_name)
+        key2Object = Key(key2_name)
 
-    def _calcValue(value):
-        nonlocal calcCount
-        calcCount += 1
-
-        if result:
-            value += (1 / 2) ** calcCount
+        if _isHigher():
+            key1Object.lower.append(key2Object)
+            key2Object.higher.append(key1Object)
         else:
-            value -= (1 / 2) ** calcCount
+            key1Object.higher.append(key2Object)
+            key2Object.lower.append(key1Object)
 
-        return value
+        KEYS.add(key1_name, key2_name)
 
-    def _addIfEmpty(key, value):
-        if not _exists(value):
-            KEYS[key] = value
-        else:
-            value = _calcValue(value)
-            _addIfEmpty(key, value)
-
-    pass
+    return _addKey()
 
 
 def isBetter(key1, key2, equal=False) -> bool:
