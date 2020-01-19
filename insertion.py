@@ -40,7 +40,7 @@ def main(args):
 
 
 def test():
-    arr = ["Android", "Java", "Python", "YEmreAk"]
+    arr = ["Lahmacun", "Kebap", "İskender", "Pide", "Künefe", "Döner"]
     insertionSort(arr)
 
     print(arr)
